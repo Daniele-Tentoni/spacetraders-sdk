@@ -1,0 +1,22 @@
+{
+  "$schema": "./node_modules/@openapitools/openapi-generator-cli/config.schema.json",
+  "spaces": 2,
+  "generator-cli": {
+    "version": "7.9.0",
+    "generators": {
+      "1": {
+        "generatorName": "typescript-axios",
+        "output": "spacetraders-sdk",
+        "inputSpec": "https://stoplight.io/api/v1/projects/spacetraders/spacetraders/nodes/reference/SpaceTraders.json?fromExportButton=true&snapshotType=http_service&deref=optimizedBundle",
+        "additionalProperties": {
+          "npmName": "spacetraders-sdk",
+          "npmVersion": "2.0.0",
+          "supportsES6": true,
+          "withSeparateModelsAndApi": true,
+          "modelPackage": "model",
+          "apiPackage": "api"
+        }
+      }
+    }
+  }
+}

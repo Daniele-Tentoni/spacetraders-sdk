@@ -1,0 +1,12 @@
+{
+    "compilerOptions": {
+        "target": "ESNext",
+        "module": "ESNext",
+        "noImplicitAny": false,
+        "outDir": "dist",
+        "rootDir": "./output",
+        "moduleResolution": "Node",
+        "typeRoots": ["node_modules/@types"]
+    },
+    "exclude": ["dist", "node_modules"]
+}

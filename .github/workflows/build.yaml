@@ -1,0 +1,54 @@
+name: Build
+
+on:
+    push:
+        branches: [main]
+
+permissions:
+  contents: read
+
+env:
+    URL: https://stoplight.io/api/v1/projects/spacetraders/spacetraders/nodes/reference/SpaceTraders.json?fromExportButton=true&snapshotType=http_service&deref=optimizedBundle
+
+jobs:
+    generate:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4.2.2
+
+            - uses: microsoft/setup-kiota@v0.5.0
+
+            - name: Update kiota clients in the repository
+              # for a complete documentation of the CLI commands see https://aka.ms/kiota/docs
+              run: |
+                kiota download -d $URL
+                kiota generate -d $URL -l TypeScript
+            
+            - uses: actions/artifact-upload@v4.4.3
+              with: 
+                path: output
+      
+    release:
+      needs: [generate]
+      permissions:
+        contents: write
+        issues: write
+        pull-requests: write
+        id-token: write
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v4.2.2
+          with:
+            fetch-depth: 0
+            persist-credentials: false
+        - uses: actions/setup-node@v4.1.0
+          with:
+            node-version: latest
+        - name: Install dependencies
+          run: npm clean-install
+        - name: Verify the integrity of provenance
+          run: npm audit signatures
+        - env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          run: npx semantic-release

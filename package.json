@@ -1,0 +1,27 @@
+{
+    "name": "spacetraders-kiota-sdk",
+    "version": "2.0.0",
+    "type": "module",
+    "files": [
+        "dist"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/daniele-tentoni/spacetraders-sdk"
+    },
+    "publishConfig": {
+        "provenance": true
+    },
+    "scripts": {
+        "build": "tsc",
+        "prepare": "npm run build",
+        "check": "node update.js"
+    },
+    "devDependencies": {
+        "@semantic-release/changelog": "^6.0.3",
+        "@types/node": "^22.9.0",
+        "semantic-release": "^24.2.0",
+        "spacetraders-kiota-sdk": "file:spacetraders-kiota-sdk-2.0.0.tgz",
+        "typescript": "^5.6.3"
+    }
+}
